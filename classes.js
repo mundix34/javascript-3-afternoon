@@ -29,7 +29,19 @@
   Call your class Employee and receive all the data in the constructor in the order listed above.
 */
 
-//Code Here
+class Employee{
+  constructor(firstname,lastname,email,num){
+    this.first_name=firstname;
+    this.last_name=lastname;
+    this.email=email;
+    this.age=num;
+  }
+  makeWidget(){
+    return this.first_name+' '+ this.last_name+' Widget';
+  }
+} //Code Here
+
+
 
 
 
@@ -49,7 +61,24 @@
   Call your new class Manager
 */
 
-//Code Here
+class Manager{
+  constructor(firstname,lastname,email,num){
+    this.first_name=firstname;
+    this.last_name=lastname;
+    this.email=email;
+    this.age=num;
+    this.reports=[];
+  }
+  makeWidget(){
+    return this.first_name+' '+ this.last_name+' Widget';
+  }
+  hire(employee){
+    this.reports.push(employee)
+  }
+  fire(index){
+    this.reports.splice(index,1)
+  }
+} //Code Here
 
 
 
@@ -75,7 +104,48 @@
   Call your new class ProgressiveManager
 */
 
-//Code Here
+class ProgressiveManager{
+  constructor(firstname,lastname,email,num){
+    this.first_name=firstname;
+    this.last_name=lastname;
+    this.email=email;
+    this.age=num;
+    this.reports=[];
+    this.title='Not a manager';
+    this.bonus= 0;
+  }
+  makeWidget(){
+    return this.first_name+' '+ this.last_name+' Widget';
+  }
+  hire(employee){
+    this.reports.push(employee)
+    this.updateTitle();
+    
+  }
+  fire(index){
+    this.reports.splice(index,1)
+    this.bonus+=100
+    this.updateTitle();
+  }
+
+  updateTitle(){
+  if(this.reports.length===0){
+    this.title='Not a Manager'
+  }else if(this.reports.length<=3&& this.reports.length>=1)
+  {
+    this.title='Barely Manager';
+  }else if(this.reports.length<=10 && this.reports.length>=4){
+    this.title='Mostly Manager'
+  }else if(this.reports.length<=50 && this.reports.length>=11){
+    this.title='Manager'
+  }else if(this.reports.length<=100 && this.reports.length>=51){
+    this.title='Manager Plus'
+  }else{
+    this.title='Bestest Manager'
+  }
+}
+}
+ //Code Here
 
 
 
@@ -101,6 +171,36 @@
         - This function returns a function that is called when the machine is done rebooting
         - It should set decrease wear_and_tear_count by 10, and set needs_reboot to false
 */
+
+class Machine{
+  constructor(){
+    this.widgets_made_count = 0;
+    this.wear_and_tear_count = 0;
+    this.needs_reboot = false
+
+  }
+  makeWidgets(num){
+    this.widgets_made_count+=num;
+    this.wear_and_tear_count+=Math.floor(num/50);
+  }
+  fixMachine(){
+    this.needs_reboot= true;
+  }
+  reboot(){
+    return ()=>{
+      this.wear_and_tear_count-=10;
+      this.needs_reboot=false;
+      console.log(this);
+      
+    }
+
+    
+    
+    
+  }
+} 
+let machine=new Machine()
+console.log(machine.reboot()());
 
 //Code Here
 
